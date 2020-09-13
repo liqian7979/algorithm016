@@ -27,7 +27,7 @@
 
 
 class Solution(object):
-    def get_hint(self, secret: str, guess: str):
+    def get_hint(self, secret, guess):
         # 公牛计数
         A = 0
         # 奶牛计数
