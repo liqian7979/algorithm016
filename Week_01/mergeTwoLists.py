@@ -30,7 +30,7 @@ def list_node(data):
 
 
 class Solution(object):
-    def merge_two_lists(self, l1: ListNode, l2: ListNode):
+    def merge_two_lists(self, l1, l2):
         """递归实现"""
         if l1 is None:
             return l2
