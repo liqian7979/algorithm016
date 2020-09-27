@@ -1,21 +1,24 @@
 学习笔记
 ### 分治模板
+```
 def divide_conquer(problem, param1, param2, ...):
-  1. recursion terminator
+  # recursion terminator
   if problem is None:
 	print_result
 	return
 
-  2. prepare data
+  # prepare data
   data = prepare_data(problem)
   subproblems = split_problem(problem, data)
 
-  3. conquer subproblems
+  # conquer subproblems
   subresult1 = self.divide_conquer(subproblems[0], p1, ...)
   subresult2 = self.divide_conquer(subproblems[1], p1, ...)
   subresult3 = self.divide_conquer(subproblems[2], p1, ...)
   …
 
-  4. process and generate the final result
+  # process and generate the final result
   result = process_result(subresult1, subresult2, subresult3, …)
-  5. revert the current level states
+  # revert the current level states`
+```
+
