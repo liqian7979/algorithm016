@@ -62,9 +62,32 @@ class Solution(object):
                     dp[r][c] = dp[r-1][c] + dp[r][c-1]
         return dp[-1][-1]
 
+    def unique_paths_with_obstacles1(self, obstacle_grid):
+        # 使用一维矩阵
+        n = len(obstacle_grid)
+        m = len(obstacle_grid[0])
+        # 初始化
+        dp = [0] * m
+        for i in range(m):
+            if obstacle_grid[0][i] == 0:
+                dp[i] = 1
+            else:
+                break
+        # print(dp)
+        for i in range(1, n):
+            for j in range(m):
+                if obstacle_grid[i][j] == 1:
+                    dp[j] = 0
+                elif j > 0:
+                    dp[j] += dp[j-1]
+                else:
+                    continue
+        return dp[m-1]
+
 
 if __name__ == '__main__':
-    test = [[0, 0], [1, 1], [0, 0]]
+    test = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
     sol = Solution()
-    res = sol.unique_paths_with_obstacles(test)
+    # res = sol.unique_paths_with_obstacles(test)
+    res = sol.unique_paths_with_obstacles1(test)
     print(res)
