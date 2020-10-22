@@ -41,8 +41,20 @@ class Solution(object):
                 dp[i][j] = dp[i-1][j] + dp[i][j-1]
         return dp[-1][-1]
 
+    def unique_paths1(self, m, n):
+        """
+        使用一维dp矩阵，减少内存空间使用
+        """
+        # 初始化
+        dp = [1 for _ in range(m)]
+        for i in range(1, n):
+            for j in range(1, m):
+                dp[j] += dp[j-1]
+        return dp[m-1]
+
 
 if __name__ == '__main__':
     sol = Solution()
-    res = sol.unique_paths(7, 3)
+    # res = sol.unique_paths(7, 3)
+    res = sol.unique_paths1(7, 3)
     print(res)
