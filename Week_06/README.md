@@ -78,3 +78,53 @@ def fib(n):
         a[i] = a[i-1] + a[i-2]
     return a[n]
 ```
+* 最长公共子序列
+```
+* s1 = "abazdc", s2 = "bacbad"
+* if s1[-1] != s2[-1]: LCS[s1, s2] = max(LCS[s1-1, s2], LCS[s1, s2-1])
+    LCS[s1, s2] = max(LCS[s1-1, s2], LCS[s1, s2-1], LCS[s1-1, s2-1])
+* if s1[-1] == s2[-1]: LCS[s1, s2] = LCS[s1-1, s2-1] + 1
+    LCS[s1, s2] = max(LCS[s1-1, s2], LCS[s1, s2-1], LCS[s1-1, s2-1], LCS[s1-1, s2-1] + 1)
+* DP方程:
+    if s1[-1] != s2[-1]: LCS[s1, s2] = max(LCS[s1-1, s2], LCS[s1, s2-1])
+    if s1[-1] == s2[-1]: LCS[s1, s2] = LCS[s1-1, s2-1] + 1
+```
+* 爬楼梯
+```
+DP方程：F(n-1) + F(n-2)
+思考：1.每次可上1个、2个或3个的情况（easy）
+     2.相邻两步的步伐不能相同的情况（medium）
+```
+
+* 三角形最小路径和
+```
+"""
+1.brute-force，递归，n层：left or right， 时间复杂度：2^n  自顶向下
+2.DP  自底向上
+    a.重复性（分治）problem(i, j) = min(sub(i+1, j), sub(i+1, j+1)) + a[i, j]
+    b.定义状态数组: f[i, j]
+    c.DP方程:f[i, j] = min(f[i+1, j], f[i+1, j+1]) + a[i, j]
+"""
+def minimum_total(self, triangle):
+    dp = triangle
+    for i in range(len(dp) - 2, -1, -1):
+        for j in range(len(dp[i])):
+            dp[i][j] += min(dp[i+1][j], dp[i+1][j+1])
+    return dp[0][0]
+
+# 只使用 O(n) 的额外空间
+def minimum_total1(self, triangle):
+    dp = triangle[-1]
+    for i in range(len(triangle)-2, -1, -1):
+        for j in range(len(triangle[i])):
+            dp[j] = min(dp[j], dp[j+1]) + triangle[i][j]
+    return dp[0]
+```
+
+##### 3.动态规划小结
+    * 打破自己的思维惯性，形成机器思维
+    * 理解复杂逻辑的关键
+    * 也是职业进阶的要点要领
+
+
+mit动态规划
