@@ -121,6 +121,43 @@ def minimum_total1(self, triangle):
     return dp[0]
 ```
 
+* 最大子序列和
+```
+"""
+1. 暴力：n^2 (可优化：以正数开头，以正数结尾）
+2. DP:
+    a. 分治（子问题） max_sum(i) = Max(max_sum(i-1), 0) + a[i]
+    b. 状态数组定义: f[i] (包含第i个元素并以其结尾的最大子序列和）
+    c. DP方程: f[i] = Max(f[i-1], 0) + a[i]
+"""
+```
+
+* 乘积最大子数组
+```
+"""
+思考:
+    1.DP问题:
+        a.分治（子问题）: 需考虑负负得正的情况，保留当前位置的最大值和最小值
+                        max_product[i] = Max(max_product[i-1] * a[i], min_product[i-1] * a[i], a[i])
+                        min_product[i] = Min(max_product[i-1] * a[i], min_product[i-1] * a[i], a[i])
+        b.状态数组定义 max_dp, min_dp
+        c.DP方程 
+            max_dp[i] = Max(max_dp[i-1] * a[i], min_dp[i-1] * a[i], a[i])
+            min_dp[i] = Max(max_dp[i-1] * a[i], min_dp[i-1] * a[i], a[i])
+"""
+
+def max_product2(self, nums):
+    # 利用两个变量维护i-1时刻的状态，res维护最大乘积
+    max_dp = min_dp = res = nums[0]
+    for i in range(1, len(nums)):
+        if nums[i] < 0:
+            max_dp, min_dp = min_dp, max_dp
+        max_dp = max(max_dp * nums[i], nums[i])
+        min_dp = min(min_dp * nums[i], nums[i])
+        res = max(max_dp, res)
+    return res
+```
+
 ##### 3.动态规划小结
     * 打破自己的思维惯性，形成机器思维
     * 理解复杂逻辑的关键
