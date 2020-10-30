@@ -46,3 +46,11 @@ class Trie(object):
             node = node[char]
         return True
 ```
+##### 6.实战题目
+* 单词搜索II
+```
+1. words遍历 --> board search    O(N*m*m*4^k)
+2. trie
+    a. all words --> Trie 构建起 prefix
+    b. board, DFS
+```
