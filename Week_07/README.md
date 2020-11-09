@@ -110,7 +110,80 @@ def find_circle_num(self, M):
     return len(set([self._parent(p, i) for i in range(n)]))
 ```
 
+## 高级搜索
+### 剪枝
+##### 1.剪枝的实现和特性
+* 初级搜索
+    1.朴素搜索
+    2.优化方式：不重复（fibonacci)、剪枝（生成括号问题）
+    3.搜索方向：
+        DFS：depth first search 深度优先搜索
+        BFS：breadth first search 广度优先搜索
+        双向搜索、启发式搜素（A*算法、优先级搜索）
 
+* DFS代码-递归写法
+```
+visited = set()
+
+def dfs(node, visited):
+    # terminator
+    if node in visited:
+        # already visited
+        return
+    visited.add(node)
+    # process current node here
+    ...
+    for next_node in node.children():
+        if not next_node in visited:
+            dfs(next_node, visited)
+```
+
+* DFS代码-非递归写法
+```
+def dfs(tree):
+    if tree.root is None:
+        return []
+    
+    visited, stack = [], [tree.root]
+
+    while stack:
+        node = stack.pop()
+        visited.add(node)
+        
+        process(node)
+        nodes = generate_related_nodes(node)
+        stack.push(nodes)
+    
+    # other processing work
+    ...
+```
+
+* BFS代码
+```
+def bfs(graph, start, end):
+    queue = []
+    queue.append([start])
+    visited.add(start)
+    
+    while queue:
+        node = queue.pop()
+        visited.add(node)
+        process(node)
+        nodes = generate_related_nodes(node)
+        queue.push(nodes)
+```
+
+* 回溯法
+    回溯法采用试错的思想，它尝试分步的去解决一个问题。在分布解决问题的过程中，当它通过尝试发现现有的分步答案不能得到有效的正确的解答的时候，它将取消上一步甚至是上几步的计算，再通过其它的可能的分步解答再次尝试寻找问题的答案。
+    回溯法通常用最简单的递归方法来实现，在反复重复上述的步骤后可能出现两种情况：
+    · 找到一个可能存在的正确的答案
+    · 在尝试了所有可能的分步方法后宣告该问题没有答案
+    在最坏的情况下，回溯法会导致一次复杂度为指数时间的计算。
+
+##### 2.剪枝实战题目解析
+    爬楼梯、括号生成、N皇后、有效的数独、解数独
+
+* 有效的数独
 
 
 
