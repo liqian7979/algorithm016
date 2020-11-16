@@ -183,8 +183,99 @@ def bfs(graph, start, end):
 ##### 2.剪枝实战题目解析
     爬楼梯、括号生成、N皇后、有效的数独、解数独
 
-* 有效的数独
+### 启发式搜索 Heuristic Search (A*)
+##### 1.A*代码模板
+```
+def AstarSearch(graph, start, end):
+    pq = collections.priority_queue() # 优先级 —> 估价函数
+    pq.append([start]) 
+    visited.add(start)
+    while pq: 
+        node = pq.pop() # can we add more intelligence here ?
+        visited.add(node)
+        process(node) 
+        nodes = generate_related_nodes(node) 
+        unvisited = [node for node in nodes if node not in visited]
+        pq.push(unvisited)
+```
 
+##### 2.估价函数
+    启发式函数：h(n)，它用来评价哪些结点最有希望的是一个我们要找的结点，h(n)会返回一个非负实数，也可以认为是从结点n到目标结点路径的估计成本。
+    启发式函数是一种告知搜索方向的方法。它提供了一种明智的方法来猜测哪个邻居结点会导向一个目标。
+
+##### 3.实战题目解析
+* 1091.二进制矩阵中的最短路径
+```
+# BFS
+def shortestPathBinaryMatrix(grid):
+    # grid: List[List[int]]
+    q, n = [(0, 0, 2)], len(grid)
+    if grid[0][0] or grid[-1][-1]:
+        return -1
+    elif n <= 2:
+        return n
+    
+    # BFS starts
+    for i, j, d in q:
+        # current node: i, j; distance = d
+        for x, y in [(i-1, j-1), (i-1, j), (i-1, j+1), 
+                     (i, j-1), (i, j+1),
+                     (i+1, j-1), (i+1, j), (i+1, j+1)]:
+            if 0 <= x < n and 0 <= y < n and not grid[x][y]:
+                if x == y == n-1:
+                    return d
+                q += [(x, y, d+1)]
+                grid[x][y] = 1
+    return -1
+```
+```
+# A*
+
+```
+
+* 773.滑动谜题
+# DFS
+# BFS - 更快找到最优解
+# A*
+```
+# BFS
+def sliding_puzzle(self, board):
+    """BFS"""
+    # 将二维数组变换为一维字符串
+    # 方向变换向量  0位于不同位置时对应的可交换的位置（在一维字符串中）
+    moves = {
+        0: [1, 3],
+        1: [0, 2, 4],
+        2: [1, 5],
+        3: [0, 4],
+        4: [1, 3, 5],
+        5: [2, 4]
+    }
+    # 存放位置移动过的字符串
+    used = set()
+    cnt = 0
+    s = ''.join(str(c) for row in board for c in row)
+    q = [s]
+    # BFS starts
+    while q:
+        new = []
+        for s in q:
+            used.add(s)
+            if s == '123450':
+                return cnt
+            arr = [c for c in s]
+            # 开始移动0
+            zero_index = s.index('0')
+            for move in moves[zero_index]:
+                new_arr = arr[:]
+                new_arr[zero_index], new_arr[move] = new_arr[move], new_arr[zero_index]
+                new_s = ''.join(new_arr)
+                if new_s not in used:
+                    new.append(new_s)
+        cnt += 1
+        q = new
+    return -1
+```
 
 
 
