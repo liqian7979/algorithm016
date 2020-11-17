@@ -234,9 +234,9 @@ def shortestPathBinaryMatrix(grid):
 ```
 
 * 773.滑动谜题
-# DFS
-# BFS - 更快找到最优解
-# A*
+    DFS
+    BFS - 更快找到最优解
+    A*
 ```
 # BFS
 def sliding_puzzle(self, board):
@@ -277,17 +277,29 @@ def sliding_puzzle(self, board):
     return -1
 ```
 
+## 红黑树和AVL树
+### AVL树
+##### 1.发明者 G.M.Adelson-Velsky 和 Evgenil Landis
+##### 2.Balance Factor(平衡因子)
+    是它的左子树的高度减去它的右子树的高度（有时相反）。
+    balance factor = {-1, 0, 1}
+##### 3.通过旋转操作来进行平衡（四种）
+    左旋
+    右旋
+    左右旋
+    右左旋
+##### 4.AVL总结
+    平衡二叉树；
+    每个结点存 balance factor = {-1, 0, 1};
+    四种旋转操作；
+    不足：结点需要存储额外信息、且调整次数频繁。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+### 红黑树 Red-black Tree
+##### 1.介绍
+    红黑树是一种近似平衡的二叉搜索树（Binary Search Tree），它能够确保任何一个结点的左右子树的高度差小于两倍。
+    具体来说，红黑树是满足如下条件的二叉搜索树：
+    * 每个结点要么是红色，要么是黑色；
+    * 根结点是黑色；
+    * 每个叶结点（NIL结点，空结点）是黑色的；
+    * 不能有相邻接的两个红色结点；
+    * 从任一结点到其每个叶子的所有路径都包含相同数目的黑色结点。
