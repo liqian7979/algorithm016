@@ -234,11 +234,10 @@ def shortestPathBinaryMatrix(grid):
 ```
 
 * 773.滑动谜题
-    DFS
-    BFS - 更快找到最优解
-    A*
 ```
-# BFS
+# DFS
+# BFS - 更快找到最优解
+# A*
 def sliding_puzzle(self, board):
     """BFS"""
     # 将二维数组变换为一维字符串
