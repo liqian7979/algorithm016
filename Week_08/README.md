@@ -230,7 +230,7 @@ class LRUCache(object):
     基数排序是按照低位先排序，然后收集；再按照高位排序，然后再收集；依次类推，直到最高位。有时候有些属性是有优先级顺序的，先按低优先级排序，再按高优先级排序。  
 
 ##### 排序动画
-   [9种经典排序算法可视化动画](https://www.bilibili.com/video/av25136272)
+   [9种经典排序算法可视化动画](https://www.bilibili.com/video/av25136272)  
    [6分钟看完15种排序算法动画展示](https://www.bilibili.com/video/av63851336)
 
 ##### 实战题目
